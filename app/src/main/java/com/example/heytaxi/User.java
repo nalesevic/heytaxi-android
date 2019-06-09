@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "user")
 public class User {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     private int userID;
     private String firstName;
     private String lastName;
@@ -14,6 +14,7 @@ public class User {
     private String city;
     private String gender;
     private String mobile;
+    private String password;
 
     public User(int userID, String firstName, String lastName, String email, String city, String gender, String mobile) {
         this.userID = userID;
@@ -38,6 +39,12 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+    @Ignore
+    public User(int userID, String firstName, String lastName) {
+        this.userID = userID;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public void setUserID(int userID) {
@@ -94,5 +101,13 @@ public class User {
 
     public String getMobile() {
         return mobile;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
     }
 }

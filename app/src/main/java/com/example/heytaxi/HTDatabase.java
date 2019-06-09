@@ -13,7 +13,7 @@ public abstract class HTDatabase extends RoomDatabase {
 
     public static HTDatabase getDatabase(Context context){
         if(INSTANCE == null){
-            INSTANCE = Room.databaseBuilder(context, HTDatabase.class, "ht_database").allowMainThreadQueries().build();
+            INSTANCE = Room.databaseBuilder(context, HTDatabase.class, "taxi_database").allowMainThreadQueries().build();
 
         }
         return INSTANCE;

@@ -15,6 +15,7 @@ import java.util.TimerTask;
 
 public class RideActivity extends AppCompatActivity {
 
+    private int userID;
     private ViewPager main_pager;
     private TextView timerTextView;
 
@@ -23,7 +24,11 @@ public class RideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride);
 
-
+        Intent intent = getIntent();
+        Bundle extras = intent.getExtras();
+        if(extras != null) {
+            userID = extras.getInt("userID");
+        }
 
         main_pager = (ViewPager) findViewById(R.id.main_pager);
         setupViewPager(main_pager);
@@ -38,8 +43,9 @@ public class RideActivity extends AppCompatActivity {
 
     public void onFinish(View view) {
         Intent intent = new Intent(this, LocationActivity.class);
-        startActivity(intent);
         intent.putExtra("hire", false);
+        intent.putExtra("userID", userID);
+        startActivity(intent);
         finish();
     }
 

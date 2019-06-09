@@ -38,12 +38,12 @@ public class DriversListAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.list_drivers, parent, false);
 
         TextView company = convertView.findViewById(R.id.company_name);
-        TextView vehicle = convertView.findViewById(R.id.vehicle);
+        TextView vehicle = convertView.findViewById(R.id.vehicle_type);
 
         Driver driver = drivers.get(position);
 
         company.setText(driver.getCompany());
-        vehicle.setText(driver.getVehicle());
+        vehicle.setText(driver.getVehicleType());
 
         return convertView;
     }

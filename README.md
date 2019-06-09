@@ -1,1 +1,0 @@
-# heytaxi-android

@@ -1,6 +1,7 @@
 package com.example.heytaxi;
 
 import android.content.Intent;
+import android.location.Location;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,6 +18,8 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,8 +49,8 @@ public class LoginActivity extends AppCompatActivity {
         login_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String email = emailET.getText().toString();
-                final String password = passwordET.getText().toString();
+                final String emailEntered = emailET.getText().toString();
+                final String passwordEntered = passwordET.getText().toString();
 
                 // Response received from the server
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -57,13 +61,22 @@ public class LoginActivity extends AppCompatActivity {
                             boolean success = jsonResponse.getBoolean("success");
 
                             if (success) {
-                                String firstName = jsonResponse.getString("firstname");
-                                String lastName = jsonResponse.getString("lastname");
-
+                                boolean is = true;
+                                int userID = jsonResponse.getInt("userID");
+                                String firstname = jsonResponse.getString("firstname");
+                                String lastname = jsonResponse.getString("lastname");
+                                List<User> users = HTDatabase.getDatabase(LoginActivity.this).userDAO().getUsers();
+                                for(int i = 0; i < users.size(); i ++) {
+                                    if(users.get(i).getUserID() == userID) {
+                                        is = false;
+                                    }
+                                }
+                                if(is) {
+                                    User user = new User(userID, firstname, lastname);
+                                    HTDatabase.getDatabase(LoginActivity.this).userDAO().register(user);
+                                }
                                 Intent intent = new Intent(LoginActivity.this, LocationActivity.class);
-                                intent.putExtra("firstname", firstName);
-                                intent.putExtra("lastname", lastName);
-                                intent.putExtra("email", email);
+                                intent.putExtra("userID", userID);
                                 LoginActivity.this.startActivity(intent);
                                 finish();
                             } else {
@@ -80,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 };
 
-                LoginRequest loginRequest = new LoginRequest(email, password, responseListener);
+                LoginRequest loginRequest = new LoginRequest(emailEntered, passwordEntered, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
             }

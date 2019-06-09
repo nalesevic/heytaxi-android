@@ -1,15 +1,19 @@
 <?php
-    $con = mysqli_connect("ns01.000webhost.com", "id9864931_heytaxi", "localhost123", "id9864931_heytaxi");
+  $conn = mysqli_connect("localhost", "id9864931_admin", "admin", "id9864931_heytaxi");
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
+   // set parameters and execute
 
-    $firstName = $_POST["firstName"];
-    $lastName = $_POST["lastName"];
-    $username = $_POST["email"];
-    $password = $_POST["password"];
+  $stmt = $conn->prepare("INSERT INTO user (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+  $stmt->bind_param("ssss", $firstname, $lastname, $email, $password);
 
-    $statement = mysqli_prepare($con, "INSERT INTO user (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
-    mysqli_stmt_bind_param($statement, "siss", $firstName, $lastName, $email, $password);
-    mysqli_stmt_execute($statement);
+  $firstname = $_POST["firstName"];
+  $lastname = $_POST["lastName"];
+  $email = $_POST["email"];
+  $password = $_POST["password"];
 
+  $stmt->execute();
     $response = array();
     $response["success"] = true;
 

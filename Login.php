@@ -1,26 +1,31 @@
 <?php
-    $con = mysqli_connect("localhost", "id9864931_heytaxi", "localhost123", "id9864931_heytaxi");
-
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-
-    $statement = mysqli_prepare($con, "SELECT * FROM user WHERE email = ? AND password = ?");
-    mysqli_stmt_bind_param($statement, "ss", $email, $password);
-    mysqli_stmt_execute($statement);
-
-    mysqli_stmt_store_result($statement);
-    mysqli_stmt_bind_result($statement, $userID, $firstname, $lastname, $email, $password);
-
-    $response = array();
-    $response["success"] = false;
-
-    while(mysqli_stmt_fetch($statement)){
-        $response["success"] = true;
-        $response["firstname"] = $firstname;
-        $response["lastname"] = $lastname;
-        $response["email"] = $email;
-        $response["password"] = $password;
+    
+    $conn = mysqli_connect("localhost", "id9864931_admin", "admin", "id9864931_heytaxi");
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
 
+    $sql = "SELECT * FROM user";
+    $result = $conn->query($sql);
+
+    
+    $response = array();
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    
+    if ($result->num_rows > 0) {
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        if($row["email"] == $email && $row["password"] == $password)
+            $response["success"] = true;
+        else
+            $response["success"] = false; 
+        
+    }
+    } else {
+        $response["success"] = false;  
+    }
+    
     echo json_encode($response);
+    
 ?>

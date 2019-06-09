@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
+    android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/layout">
+        android:layout_height="match_parent">
 
 
         <ImageView
@@ -22,23 +23,22 @@
             android:src="@drawable/nav_menu_header_bg"
             app:srcCompat="@drawable/nav_menu_header_bg" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-
-            android:clickable="true"
-            app:civ_border_width="3dp"
-            app:civ_border_color="#FFFFFFFF"
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
 
             android:id="@+id/profile"
             android:layout_width="200dp"
             android:layout_height="200dp"
+
             android:layout_below="@+id/header_cover_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-130dp"
+            android:clickable="true"
             android:elevation="5dp"
             android:padding="20dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/man" />
+            android:src="@drawable/man"
+            app:civ_border_color="#FFFFFFFF"
+            app:civ_border_width="3dp" />
 
         <RelativeLayout
             android:id="@+id/profile_layout"
@@ -84,84 +84,72 @@
             android:paddingBottom="200dp">
 
             <TextView
-                android:id="@+id/mobile_profile"
+                android:id="@+id/mobileNumber2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="79dp"
-                android:layout_marginRight="79dp"
-                android:clickable="true"
-                android:text="063295845"
-                android:textSize="24sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/mobileNumber"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/textView16"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginTop="4dp"
-                android:clickable="true"
-                android:text="Age"
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="16dp"
-                android:clickable="true"
-                android:text="Gender: "
-                android:textSize="30sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mobileNumber" />
-
-            <TextView
-                android:id="@+id/age_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="130dp"
-                android:layout_marginRight="130dp"
-                android:clickable="true"
-                android:text="21"
-                android:textSize="24sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView16"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/gender_profile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="115dp"
-                android:layout_marginRight="115dp"
-                android:clickable="true"
-                android:text="Male"
-                android:textSize="24sp"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView11"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <TextView
-                android:id="@+id/mobileNumber"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
                 android:layout_marginTop="64dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
                 android:clickable="true"
                 android:text="Mobile: "
                 android:textSize="30sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/mobile_profile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/city_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginTop="42dp"
+                android:clickable="true"
+                android:text="City:"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mobileNumber2" />
+
+            <Button
+                android:id="@+id/save_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="84dp"
+                android:text="Save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/city_profile" />
+
+            <EditText
+                android:id="@+id/mobile_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/mobileNumber2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/city_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mobile_profile" />
 
         </android.support.constraint.ConstraintLayout>
     </RelativeLayout>

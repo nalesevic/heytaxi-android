@@ -4,25 +4,26 @@ public class Driver {
     private int driverID;
     private String firstName;
     private String lastName;
-    private String vehicle;
+    private String vehicleType;
     private String company;
-    private int rating;
+    private String driverLocation;
+    private String rating;
 
-    public Driver(String firstName, String lastName, String vehicle, String company, int rating) {
+    public Driver(String firstName, String lastName, String vehicleType, String company, String driverLocation, String rating) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.vehicle = vehicle;
+        this.vehicleType = vehicleType;
         this.company = company;
+        this.driverLocation = driverLocation;
         this.rating = rating;
     }
 
-    public Driver(int driverID, String firstName, String lastName, String vehicle, String company, int rating) {
-        this.driverID = driverID;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.vehicle = vehicle;
-        this.company = company;
-        this.rating = rating;
+    public void setDriverLocation(String driverLocation) {
+        this.driverLocation = driverLocation;
+    }
+
+    public String getDriverLocation() {
+        return driverLocation;
     }
 
     public void setDriverID(int driverID) {
@@ -37,15 +38,15 @@ public class Driver {
         this.lastName = lastName;
     }
 
-    public void setVehicle(String vehicle) {
-        this.vehicle = vehicle;
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
     }
 
     public void setCompany(String company) {
         this.company = company;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
 
@@ -61,15 +62,15 @@ public class Driver {
         return lastName;
     }
 
-    public String getVehicle() {
-        return vehicle;
+    public String getVehicleType() {
+        return vehicleType;
     }
 
     public String getCompany() {
         return company;
     }
 
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 }

@@ -50,7 +50,10 @@ public class RideFragment extends Fragment {
             public void run() {
                 timerCount++;
                 distanceCount += 0.1;
-                timerText.setText("00:"+timerCount);
+                if(timerCount < 60)
+                    timerText.setText("00:"+timerCount);
+                else
+                    timerText.setText("01:"+timerCount);
                 int d = Math.round(distanceCount);
                 distanceText.setText(""+d);
                 handler.postDelayed(this, 1000); //  delay one second before updating the number

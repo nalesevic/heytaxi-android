@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/seats_spinner"
+        android:id="@+id/vehicleType_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
@@ -45,7 +45,7 @@
         android:numStars="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seats_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/vehicleType_spinner" />
 
     <Button
         android:id="@+id/apply_filter_button"
