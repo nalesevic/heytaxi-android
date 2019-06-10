@@ -8,11 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class DriversRequest extends StringRequest {
-    private static final String REGISTER_REQUEST_URL = "https://heytaxii.000webhostapp.com/Driver.php/";
+    private static final String REQUEST_URL = "https://heytaxii.000webhostapp.com/Driver.php/";
     private Map<String, String> params;
 
     public DriversRequest(String location, String company, String vehicleType, String rating, Response.Listener<String> listener) {
-        super(Request.Method.POST, REGISTER_REQUEST_URL, listener, null);
+        super(Request.Method.POST, REQUEST_URL, listener, null);
         params = new HashMap<>();
         params.put("location", location);
         params.put("company", company);

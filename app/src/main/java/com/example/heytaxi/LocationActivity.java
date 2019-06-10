@@ -65,6 +65,7 @@ public class LocationActivity extends AppCompatActivity {
 
     public void onAddFilters(View view) {
         Intent intent = new Intent(this, FilterActivity.class);
+        intent.putExtra("userID", userID);
         startActivity(intent);
     }
 
