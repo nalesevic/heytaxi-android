@@ -18,8 +18,6 @@ public class RideFragment extends Fragment {
     private float distanceCount;
     private TextView timerText;
     private TextView distanceText;
-    private String time;
-    private String distance;
 
     public static RideFragment newInstance() {
         RideFragment fragment = new RideFragment();

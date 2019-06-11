@@ -12,6 +12,7 @@ import android.widget.Spinner;
 public class FilterActivity extends AppCompatActivity {
 
     private int userID;
+    private String userLocation;
     private String company;
     private String vehicleType;
     private String rating;
@@ -28,6 +29,7 @@ public class FilterActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         if(extras != null) {
             userID = extras.getInt("userID");
+            userLocation = extras.getString("userLocation");
         }
 
         companyS = findViewById(R.id.company_spinner);
@@ -35,10 +37,10 @@ public class FilterActivity extends AppCompatActivity {
         ratingBar = findViewById(R.id.choose_rating);
 
         String[] companies = new String[] {
-                "Red Taxi", "Sarajevo Taxi", "Yellow Taxi"
+                "all", "Red Taxi", "Sarajevo Taxi", "Yellow Taxi"
         };
         String[] vehicles = new String[] {
-                "Limousine", "Hatchback", "Van"
+                "all", "Limousine", "Hatchback", "Van"
         };
         ArrayAdapter<String> companyAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_dropdown_item, companies);
@@ -57,14 +59,14 @@ public class FilterActivity extends AppCompatActivity {
         rating = String.valueOf(rating_float);
         company = companyS.getSelectedItem().toString();
         vehicleType = vehicleTypeS.getSelectedItem().toString();
-        Log.e("SELECTED", company);
-        Log.e("SELECTED", vehicleType);
-        Log.e("SELECTED", rating);
+        if(rating.equals("0.0"))
+            rating = "6";
         Intent intent = new Intent(this, LocationActivity.class);
         intent.putExtra("userID", userID);
         intent.putExtra("rating", rating);
         intent.putExtra("company", company);
         intent.putExtra("vehicleType", vehicleType);
+        intent.putExtra("userLocation", userLocation);
         startActivity(intent);
         finish();
     }

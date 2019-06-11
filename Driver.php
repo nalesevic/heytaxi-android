@@ -6,38 +6,48 @@
     }
     $is = 0;
     $p_location = $_POST["location"];
-
+    $p_company = $_POST["company"];
+    $p_vehicleType = $_POST["vehicleType"];
+    $p_rating = $_POST["rating"];
+    
     $sqlriz = "Select * FROM driver";
     $Rslt = mysqli_query($conn, $sqlriz);
     while($r=mysqli_fetch_object($Rslt)){
         $res[]=$r;
     }
-    if($_POST["company"] == "all") {
+    
+    if($p_company == "all" && $p_vehicleType == "all") {
         for ($x = 0; $x < sizeof($res); $x++) {
             $obj = $res[$x];
-            if(strtolower($obj->driverLocation) == strtolower($p_location)) {
+            if(strtolower($obj->driverLocation) == strtolower($p_location) && $obj->rating <= $p_rating) {
                 $response[] = $obj;
                 $is = 1;
             }
         }
-    } else {
-        $p_vehicleType = $_POST["vehicleType"];
-        $p_company = $_POST["company"];
-        $p_rating = $_POST["rating"];
-
+    } else if($p_company != "all") {
         for ($x = 0; $x < sizeof($res); $x++) {
             $obj = $res[$x];
-            if($obj->vehicleType == $p_vehicleType && $obj->company == $p_company && strtolower($obj->driverLocation) == strtolower($p_location) && $obj->rating >= $p_rating) {
+            if(strtolower($obj->driverLocation) == strtolower($p_location) && $obj->rating <= $p_rating && $p_company == $obj->company) {
+                $response[] = $obj;
+                $is = 1;
+            }
+        }
+    } else if($p_vehicleType != "all") {
+        for ($x = 0; $x < sizeof($res); $x++) {
+            $obj = $res[$x];
+            if(strtolower($obj->driverLocation) == strtolower($p_location) && $obj->rating <= $p_rating && $p_vehicleType == $obj->vehicleType) {
                 $response[] = $obj;
                 $is = 1;
             }
         }
     }
+
+    
     if($is == 1)
         echo json_encode($response);
     else {
         $response["success"] = "false";
         echo json_encode($response);
     }
-
+        
 ?>

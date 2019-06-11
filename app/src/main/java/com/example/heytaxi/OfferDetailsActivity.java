@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class OfferDetailsActivity extends AppCompatActivity {
 
     private int userID;
+    private int driverID;
     private TextView firstNameTV;
     private TextView lastNameTV;
     private TextView vehicleTypeTV;
@@ -33,6 +34,7 @@ public class OfferDetailsActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         if(extras != null) {
             userID = extras.getInt("userID");
+            driverID  = extras.getInt("driverID");
             String driverfn = extras.getString("driverfn");
             String driverln = extras.getString("driverln");
             String vehicleType = extras.getString("vt");
@@ -54,6 +56,7 @@ public class OfferDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, LocationActivity.class);
         intent.putExtra("hire", true);
         intent.putExtra("userID", userID);
+        intent.putExtra("driverID", driverID);
         startActivity(intent);
         finish();
     }

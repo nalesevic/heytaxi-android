@@ -26,6 +26,7 @@ public class OfferActivity extends AppCompatActivity {
 
     private ListView drivers_listView;
     private int userID;
+    private int driverID;
     private String userLocation;
     private String rating;
     private String vehicleType;
@@ -45,10 +46,13 @@ public class OfferActivity extends AppCompatActivity {
         drivers_listView = findViewById(R.id.drivers_list);
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
+        rating = "6";
+        vehicleType = "all";
+        company = "all";
         if(extras != null) {
             userID = extras.getInt("userID");
-            userLocation = extras.getString("userLocation");
-            rating = extras.getString("rating", "1");
+            userLocation = extras.getString("userLocation", "all");
+            rating = extras.getString("rating", "6");
             vehicleType = extras.getString("vehicleType", "all");
             company = extras.getString("company", "all");
 
@@ -65,6 +69,7 @@ public class OfferActivity extends AppCompatActivity {
                         JSONObject mJsonObject = new JSONObject();
                         for (int i = 0; i < mJsonArray.length(); i++) {
                             mJsonObject = mJsonArray.getJSONObject(i);
+                            driverID = mJsonObject.getInt("driverID");
                             fn = mJsonObject.getString("firstname");
                             ln = mJsonObject.getString("lastName");
                             vt = mJsonObject.getString("vehicleType");
@@ -76,7 +81,7 @@ public class OfferActivity extends AppCompatActivity {
                         DriversListAdapter adapter = new DriversListAdapter(OfferActivity.this, drivers);
                         drivers_listView.setAdapter(adapter);
                     } else {
-                        Toast.makeText(OfferActivity.this, "Enter your location", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OfferActivity.this, "No available drivers", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(OfferActivity.this, LocationActivity.class);
                         intent.putExtra("userID", userID);
                         startActivity(intent);
@@ -96,7 +101,8 @@ public class OfferActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Driver driver = (Driver) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), OfferDetailsActivity.class);
-                intent.putExtra("driverID", driver.getDriverID());
+                Log.i("DRIVER ID", String.valueOf(driverID));
+                intent.putExtra("driverID", driverID);
                 intent.putExtra("userID", userID);
                 intent.putExtra("driverfn", driver.getFirstName());
                 intent.putExtra("driverln", driver.getLastName());

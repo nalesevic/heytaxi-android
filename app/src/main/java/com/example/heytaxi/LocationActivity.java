@@ -18,6 +18,7 @@ public class LocationActivity extends AppCompatActivity {
 
     private EditText userLocationET;
     private int userID;
+    private int driverID;
     private boolean hire;
     private String userLocation;
     private String rating;
@@ -35,10 +36,13 @@ public class LocationActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         if(extras != null) {
             userID = extras.getInt("userID");
+            driverID = extras.getInt("driverID");
             vehicleType = extras.getString("vehicleType");
             company = extras.getString("company");
             rating = extras.getString("rating");
+            userLocation = extras.getString("userLocation");
         }
+        userLocationET.setText(userLocation);
     }
     @Override
     public void onResume() {
@@ -48,11 +52,14 @@ public class LocationActivity extends AppCompatActivity {
 
         if(extras != null) {
             userID = extras.getInt("userID");
+            driverID = extras.getInt("driverID");
             hire = extras.getBoolean("hire");
             // redundant ? ?
             vehicleType = extras.getString("vehicleType");
             company = extras.getString("company");
             rating = extras.getString("rating");
+            userLocation = extras.getString("userLocation");
+
             //
             if(hire == true) {
                 TextView hireInstr = (TextView) findViewById(R.id.notif);
@@ -61,11 +68,13 @@ public class LocationActivity extends AppCompatActivity {
                 hireInstr.setVisibility(View.VISIBLE);
             }
         }
+        userLocationET.setText(userLocation);
     }
 
     public void onAddFilters(View view) {
         Intent intent = new Intent(this, FilterActivity.class);
         intent.putExtra("userID", userID);
+        intent.putExtra("userLocation", userLocation);
         startActivity(intent);
     }
 
@@ -98,6 +107,7 @@ public class LocationActivity extends AppCompatActivity {
     public void onStart(View view) {
         Intent intent = new Intent(this, RideActivity.class);
         intent.putExtra("userID", userID);
+        intent.putExtra("driverID", driverID);
         startActivity(intent);
         finish();
     }
